@@ -27,7 +27,36 @@ const createJob = async (req, res) => {
     }
 }
 
+const updateJobStatus = async(req, res) => {
+    try {
+        const {status} = req.body
+        const jobId = req.params.jobId
+        const updatedJob = await Job.findByIdAndUpdate(jobId, {status}, {
+            new:true
+        })
+        return res.status(200).json({msg: 'job updated', job: updatedJob})
+    } catch (error) {
+        console.log("error while updating job", error)
+    }
+}
+
+const deleteJob = async(req, res) => {
+    try {
+        const jobId = req.params.jobId
+        const user = await User.findOne({_id: req._id})
+        // console.log("user", user, req._id)
+        const deletedJob = await Job.findOneAndDelete({_id: jobId})
+        user.jobs = user.jobs.filter(item => item._id.toString() !== jobId)
+        await user.save()
+        return res.status(200).json({msg:"job deleted", job: deletedJob})
+    } catch (error) {
+        console.log("error while deleting the job", error)
+    }
+}
+
 module.exports = {
     allJobs,
-    createJob
+    createJob,
+    updateJobStatus, 
+    deleteJob
 }

@@ -16,7 +16,7 @@ const validToken = (req, res, next) => {
 const validUser = (req, res, next) => {
     const userId = req.params.id
     const _id = req._id
-    console.log(userId, _id)
+    // console.log(userId, _id)
     if(!(userId === _id)) return res.status(400).json({msg: 'You are not authorized!'})
     next()
 }
