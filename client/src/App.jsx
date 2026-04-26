@@ -19,18 +19,13 @@ const App = () => {
             <Route path="/register" element={<Register />} />
           </Route>
           <Route element={<ProtectedRoute />}>
-            <Route path='/' element={<div>
-              <Sidebar />
+            <Route path='/' element={
               <Dashboard />
-            </div>} />
-            <Route path="/form" element={<div>
-              <Sidebar />
-              <EntryForm />
-            </div>} />
-            <Route path="/status" element={<div>
-              <Sidebar />
-              <DetailsPage />
-            </div>} />
+            } />
+            <Route path="/form" element={
+              <EntryForm />} />
+            <Route path="/status" element={
+              <DetailsPage />} />
           </Route>
         </Route>
       </Routes>
