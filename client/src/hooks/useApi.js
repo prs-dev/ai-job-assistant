@@ -56,11 +56,26 @@ const useApi = () => {
         }
     }
 
+    const allJobs = async(id, token) => {
+        const res = await fetch(`/api/job/all/${id}`, {
+            method: "get",
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            }
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     return {
         registerUser,
         loginUser,
         userDetails,
-        createNewJob
+        createNewJob,
+        allJobs
     }
 }
 

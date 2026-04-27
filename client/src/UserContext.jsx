@@ -13,7 +13,7 @@ export const UserContextProvider = ({ children }) => {
 
     const [user, setUser] = useState(() => {
         const data = localStorage.getItem("user")
-        return data
+        return JSON.parse(data)
     })
 
     useEffect(() => {
@@ -34,15 +34,12 @@ export const UserContextProvider = ({ children }) => {
     }, [token])
 
     return (
-        <UserContext.Provider value={{ token, setToken }}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{ token, setToken, user }}>{children}</UserContext.Provider>
     )
 }
 
 export const useUserContext = () => {
-    const { token, setToken } = useContext(UserContext)
-    return {
-        token,
-        setToken
-    }
+    const value = useContext(UserContext)
+    return value
 }
 
