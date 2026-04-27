@@ -41,10 +41,26 @@ const useApi = () => {
         }
     }
 
+    const createNewJob = async(body, token) => {
+        const res = await fetch('/api/job/create', {
+            method: "post",
+            body: JSON.stringify(body),
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            }
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     return {
         registerUser,
         loginUser,
-        userDetails
+        userDetails,
+        createNewJob
     }
 }
 

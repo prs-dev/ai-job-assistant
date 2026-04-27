@@ -29,11 +29,6 @@ export const UserContextProvider = ({ children }) => {
                     setUser(data.user)
                     localStorage.setItem("user", JSON.stringify(data.user))
                 })
-
-            // if (data.user) {
-            //     setUser(data.user)
-            //     localStorage.setItem("user", JSON.stringify(data.user))
-            // }
         }
         else localStorage.removeItem("user")
     }, [token])

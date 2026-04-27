@@ -1,8 +1,10 @@
 import {Outlet, Navigate} from 'react-router-dom'
 import Sidebar from './Sidebar'
+import {useUserContext} from './UserContext'
 
 const ProtectedRoute = () => {
-    const token = false
+    const {token} = useUserContext()
+    // console.log("tokne", token)
   return token ? <div>
     <Sidebar />
     <Outlet />
