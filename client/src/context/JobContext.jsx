@@ -21,7 +21,7 @@ export const JobContextProvider = ({ children }) => {
                     setJobs(data.jobs)
                 })
         }
-    }, [])
+    }, [token])
 
     return (
         <JobContext.Provider value={{jobs, setJobs}}>
