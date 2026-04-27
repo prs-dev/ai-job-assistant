@@ -27,9 +27,24 @@ const useApi = () => {
         }
     }
 
+    const userDetails = async(token) => {
+        const res = await fetch('/api/auth/user', {
+            method: "get",
+            headers: {
+                "authorization": `Bearer ${token}`,
+                "content-type": "application/json"
+            }
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     return {
         registerUser,
-        loginUser
+        loginUser,
+        userDetails
     }
 }
 

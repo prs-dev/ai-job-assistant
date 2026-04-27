@@ -35,7 +35,18 @@ const login = async(req, res) => {
     }
 }
 
+const userDetails = async(req, res) => {
+    try {
+        const user = await User.findOne({_id: req._id}).populate('jobs')
+        delete user._doc.password
+        return res.status(200).json({msg: "user", user})
+    } catch (error) {
+        console.log("error in fetching use details", error)
+    }
+}
+
 module.exports = {
     register,
-    login
+    login,
+    userDetails
 }
