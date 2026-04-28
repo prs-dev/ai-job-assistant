@@ -85,13 +85,28 @@ const useApi = () => {
         }
     }
 
+    const deleteJob = async(token, id, userId) => {
+        const res = await fetch(`/api/job/delete/${userId}/${id}`, {
+            method: "delete",
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            }
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     return {
         registerUser,
         loginUser,
         userDetails,
         createNewJob,
         allJobs,
-        updateJobStatus
+        updateJobStatus, 
+        deleteJob
     }
 }
 
