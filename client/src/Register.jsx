@@ -2,6 +2,11 @@ import { useState } from 'react'
 import useApi from './hooks/useApi'
 import { useNavigate } from 'react-router-dom'
 
+//shadcn
+import { Input } from '@/components/ui/input'
+import { FieldLabel, Field, FieldLegend, FieldDescription } from '@/components/ui/field'
+import { Button } from '@/components/ui/button'
+
 const Register = () => {
   const [state, setState] = useState(null)
 
@@ -24,22 +29,29 @@ const Register = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="">Name</label>
-        <input type="text" name="name" value={state?.name} onChange={handleChange} />
-      </div>
-      <div>
-        <label htmlFor="">Email</label>
-        <input type="email" name="email" value={state?.email} onChange={handleChange} />
-      </div>
-      <div>
-        <label htmlFor="">Password</label>
-        <input type="password" name="password" value={state?.password} onChange={handleChange} />
-      </div>
-      <div>
-        <button type="submit">Save</button>
-      </div>
+    <form onSubmit={handleSubmit} className='w-full max-w-sm flex flex-col gap-3'>
+      <Field>
+        <FieldLegend>Register</FieldLegend>
+        <FieldDescription>register as new user to login</FieldDescription>
+      </Field>
+      <Field>
+        <FieldLabel htmlFor="">Name</FieldLabel>
+        <Input type="text" name="name" value={state?.name} onChange={handleChange} />
+      </Field>
+      <Field>
+        <FieldLabel htmlFor="">Email</FieldLabel>
+        <Input type="email" name="email" value={state?.email} onChange={handleChange} />
+      </Field>
+      <Field>
+        <FieldLabel htmlFor="">Password</FieldLabel>
+        <Input type="password" name="password" value={state?.password} onChange={handleChange} />
+      </Field>
+      <Field>
+        <Button type="submit">Submit</Button>
+      </Field>
+      <Field orientation='horizontal' className="text-sm">
+        Already registered?<span className='font-bold underline' onClick={() => navigate('/login')}>Login</span>
+      </Field>
     </form>
   )
 }

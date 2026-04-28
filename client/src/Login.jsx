@@ -4,7 +4,7 @@ import { useUserContext } from './UserContext'
 import { useNavigate } from 'react-router-dom'
 
 //shadcn
-import {Field, FieldLabel} from '@/components/ui/field'
+import {Field, FieldLabel, FieldLegend, FieldDescription} from '@/components/ui/field'
 import {Input} from '@/components/ui/input'
 import {Button} from '@/components/ui/button'
 
@@ -35,10 +35,10 @@ console.log("token", token)
 
   return (
     <form onSubmit={handleSubmit} className='w-full max-w-sm flex flex-col gap-3'>
-      {/* <div>
-        <label htmlFor="">Email</label>
-        <input type="email" name="email" value={state?.email} onChange={handleChange}/>
-      </div> */}
+      <Field>
+        <FieldLegend>Login</FieldLegend>
+        <FieldDescription>login to contiue to the dashboard</FieldDescription>
+      </Field> 
       <Field>
         <FieldLabel>
           Email
@@ -51,13 +51,6 @@ console.log("token", token)
         </FieldLabel>
         <Input type="password" name="password" value={state?.password} onChange={handleChange}/>
       </Field>
-      {/* <div>
-        <label htmlFor="">Password</label>
-        <input type="password" name="password" value={state?.password} onChange={handleChange}/>
-      </div> */}
-      {/* <div>
-        <button type="submit">Save</button>
-      </div> */}
       <Field>
         <Button type="submit">Submit</Button>
       </Field>
