@@ -10,6 +10,9 @@ Features to include:
 * tailwind and shadcn for UI styling
 * bug fixes
 
+Branch: v1-styles
+* for implementing shadcn and tailwindcss
+
 ![alt text](image.png)
 ![alt text](image-1.png)
 ![alt text](image-2.png)
