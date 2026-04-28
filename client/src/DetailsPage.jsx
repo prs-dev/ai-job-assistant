@@ -4,7 +4,7 @@ import useApi from './hooks/useApi'
 import { useUserContext } from './UserContext'
 
 const DetailsPage = () => {
-  const { jobs, setJobs } = useJobContext()
+  const { jobs, setJobs, setLoading, loading } = useJobContext()
   const [active, setActive] = useState(null) //for update
   const [toDelete, setToDelete] = useState(null)
   const [answer, setAnswer] = useState('no')
@@ -12,10 +12,12 @@ const DetailsPage = () => {
   const {updateJobStatus, deleteJob, allJobs} = useApi()
   console.log("jobs", jobs)
   const handleStatusChange = async() => {
+    setLoading(true)
     const data = await updateJobStatus(active, token, user._id)
     if(data) {
       console.log("details", data)
       setActive(null)
+      setLoading(false)
     }
   }
 
@@ -36,6 +38,7 @@ const DetailsPage = () => {
       {jobs?.map(job => {
         return (
           <>
+          {loading && <p>loading changes...</p>}
             <div>
               <label>Company</label>
               <p>{job?.company}</p>

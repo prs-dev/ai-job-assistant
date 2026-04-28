@@ -6,6 +6,7 @@ export const JobContext = createContext()
 
 export const JobContextProvider = ({ children }) => {
     const [jobs, setJobs] = useState(null)
+    const [loading, setLoading] = useState(false)
     const [summary, setSummary] = useState(null)
 
     const { allJobs, fetchSummary } = useApi()
@@ -22,7 +23,7 @@ export const JobContextProvider = ({ children }) => {
                     setJobs(data.jobs)
                 })
         }
-    }, [token])
+    }, [token, loading])
 
     useEffect(() => {
         if (user._id) {
@@ -32,10 +33,10 @@ export const JobContextProvider = ({ children }) => {
                     setSummary(data?.summary[0])
                 })
         }
-    }, [token])
+    }, [token, loading])
 
     return (
-        <JobContext.Provider value={{jobs, setJobs, summary}}>
+        <JobContext.Provider value={{jobs, setJobs, summary, loading, setLoading}}>
             {children}
         </JobContext.Provider>
     )

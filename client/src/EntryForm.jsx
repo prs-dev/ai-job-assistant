@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import useApi from './hooks/useApi'
 import { useUserContext } from './UserContext'
+import { useJobContext } from './context/JobContext'
 
 const EntryForm = () => {
   const { createNewJob } = useApi()
   const { token } = useUserContext()
+  const {loading, setLoading} = useJobContext()
   const [state, setState] = useState({
     company: '',
     role: '',
@@ -15,6 +17,7 @@ const EntryForm = () => {
     setState(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
   const handleSubmit = async e => {
+    setLoading(true)
     e.preventDefault()
     const data = await createNewJob(state, token)
     if (data) {
@@ -25,9 +28,12 @@ const EntryForm = () => {
         notes: ''
       })
       console.log("job", data)
+      setLoading(false)
     }
   }
   return (
+    <>
+    {loading && <p>saving changes...</p>}
     <form action="" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="">Company</label>
@@ -54,6 +60,7 @@ const EntryForm = () => {
         <button type="submit">Save</button>
       </div>
     </form>
+    </>
   )
 }
 
