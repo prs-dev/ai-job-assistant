@@ -14,7 +14,7 @@ export const JobContextProvider = ({ children }) => {
     // console.log("user I am here", user._id)
 
     useEffect(() => {
-        if (user) {
+        if (user._id) {
             allJobs(user?._id, token)
                 .then(data => {
                     // console.log("jobs", data)

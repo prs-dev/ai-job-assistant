@@ -70,12 +70,28 @@ const useApi = () => {
         }
     }
 
+    const updateJobStatus = async(body, token, userId) => {
+        const res = await fetch(`/api/job/update/${userId}/${body._id}`, {
+            method: "put",
+            body: JSON.stringify({status: body.status}),
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            }
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     return {
         registerUser,
         loginUser,
         userDetails,
         createNewJob,
-        allJobs
+        allJobs,
+        updateJobStatus
     }
 }
 
