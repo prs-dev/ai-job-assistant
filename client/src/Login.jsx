@@ -1,11 +1,19 @@
 import {useState} from 'react'
 import useApi from './hooks/useApi'
 import { useUserContext } from './UserContext'
+import { useNavigate } from 'react-router-dom'
+
+//shadcn
+import {Field, FieldLabel} from '@/components/ui/field'
+import {Input} from '@/components/ui/input'
+import {Button} from '@/components/ui/button'
 
 const Login = () => {
   const [state, setState] = useState(null)
 
   const {loginUser} = useApi()
+
+  const navigate = useNavigate()
 
   const {token, setToken} = useUserContext()
 
@@ -26,18 +34,36 @@ const handleSubmit = async e => {
 console.log("token", token)
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form onSubmit={handleSubmit} className='w-full max-w-sm flex flex-col gap-3'>
+      {/* <div>
         <label htmlFor="">Email</label>
         <input type="email" name="email" value={state?.email} onChange={handleChange}/>
-      </div>
-      <div>
+      </div> */}
+      <Field>
+        <FieldLabel>
+          Email
+        </FieldLabel>
+        <Input type="email" name="email" value={state?.email} onChange={handleChange}/>
+      </Field>
+      <Field>
+        <FieldLabel>
+          Password
+        </FieldLabel>
+        <Input type="password" name="password" value={state?.password} onChange={handleChange}/>
+      </Field>
+      {/* <div>
         <label htmlFor="">Password</label>
         <input type="password" name="password" value={state?.password} onChange={handleChange}/>
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <button type="submit">Save</button>
-      </div>
+      </div> */}
+      <Field>
+        <Button type="submit">Submit</Button>
+      </Field>
+      <Field orientation='horizontal' className="text-sm">
+        New here? Please<span className='font-bold underline' onClick={() => navigate('/register')}>Register</span>
+      </Field>
     </form>
   )
 }

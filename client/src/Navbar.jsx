@@ -10,15 +10,15 @@ const Navbar = () => {
     navigate('/login')
   }
   return (
-    <div>
-      <h2 onClick={() => navigate('/')}>Job Manager</h2>
-      <ul>
+    <>
+      <h2 onClick={() => navigate('/')}>AI Job Manager</h2>
+      <ul className="flex gap-2 text-sm">
         {token ? <li onClick={handleLogout}>logout</li> : <>
           <li onClick={() => navigate('/login')}>Login</li>
           <li onClick={() => navigate('/register')}>Register</li>
         </>}
       </ul>
-    </div>
+    </>
   )
 }
 
