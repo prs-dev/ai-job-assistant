@@ -99,6 +99,20 @@ const useApi = () => {
         }
     }
 
+    const fetchSummary = async(token, id) => {
+        const res = await fetch(`/api/job/summary/${id}`, {
+            method: "get",
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            }
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     return {
         registerUser,
         loginUser,
@@ -106,7 +120,8 @@ const useApi = () => {
         createNewJob,
         allJobs,
         updateJobStatus, 
-        deleteJob
+        deleteJob,
+        fetchSummary
     }
 }
 
