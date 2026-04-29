@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useUserContext } from "./UserContext"
 
 const Navbar = () => {
-  const {setToken, setUser, token} = useUserContext()
+  const {setToken, setUser, token, user} = useUserContext()
   const navigate = useNavigate()
   const handleLogout = () => {
     setToken(null)
@@ -11,9 +11,12 @@ const Navbar = () => {
   }
   return (
     <>
-      <h2 onClick={() => navigate('/')}>AI Job Manager</h2>
-      <ul className="flex gap-2 text-sm">
-        {token ? <li onClick={handleLogout}>logout</li> : <>
+      <h2 className="text-xl" onClick={() => navigate('/')}>AI Job Manager</h2>
+      <ul className="flex gap-2 text-md">
+        {token ? <>
+          <li>Welcome <span className="underline">{user?.name}</span></li>
+          <li onClick={handleLogout}>logout</li>
+        </> : <>
           <li onClick={() => navigate('/login')}>Login</li>
           <li onClick={() => navigate('/register')}>Register</li>
         </>}
