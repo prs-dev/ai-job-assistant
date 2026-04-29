@@ -11,14 +11,14 @@ const Navbar = () => {
   }
   return (
     <>
-      <h2 className="text-xl" onClick={() => navigate('/')}>AI Job Manager</h2>
+      <h2 className="text-xl cursor-pointer" onClick={() => navigate('/')}>AI Job Manager</h2>
       <ul className="flex gap-2 text-md">
         {token ? <>
           <li>Welcome <span className="underline">{user?.name}</span></li>
-          <li onClick={handleLogout}>logout</li>
+          <li className="cursor-pointer" onClick={handleLogout}>logout</li>
         </> : <>
-          <li onClick={() => navigate('/login')}>Login</li>
-          <li onClick={() => navigate('/register')}>Register</li>
+          <li className="cursor-pointer" onClick={() => navigate('/login')}>Login</li>
+          <li className="cursor-pointer" onClick={() => navigate('/register')}>Register</li>
         </>}
       </ul>
     </>
