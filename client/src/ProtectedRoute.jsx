@@ -7,9 +7,7 @@ const ProtectedRoute = () => {
     // console.log("tokne", token)
   return token ? <div className='flex gap-[20px]'>
     <Sidebar />
-   <div className='w-full flex items-center justify-center'>
      <Outlet />
-   </div>
   </div> : <Navigate to='/login' replace/>
 }
 

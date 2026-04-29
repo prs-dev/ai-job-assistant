@@ -41,8 +41,8 @@ const EntryForm = () => {
     }
   }
   return (
-    <>
-      <Card className="w-full max-w-sm text-gray-200 bg-gray-800">
+    <div className='flex items-center justify-center w-full'>
+      <Card className="w-full max-w-sm bg-gray-800 text-gray-200">
         <CardHeader>
           <CardTitle>Entry Form</CardTitle>
           <CardDescription>Entry form for new entry of job</CardDescription>
@@ -80,7 +80,7 @@ const EntryForm = () => {
         <Spinner />
         <span>saving changes...</span>
       </div>}
-    </>
+    </div>
   )
 }
 
