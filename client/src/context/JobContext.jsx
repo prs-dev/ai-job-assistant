@@ -16,7 +16,7 @@ export const JobContextProvider = ({ children }) => {
     // console.log("user I am here", user._id)
 
     useEffect(() => {
-        if (user._id) {
+        if (user?._id) {
             allJobs(user?._id, token)
                 .then(data => {
                     // console.log("jobs", data)
@@ -26,7 +26,7 @@ export const JobContextProvider = ({ children }) => {
     }, [token, loading])
 
     useEffect(() => {
-        if (user._id) {
+        if (user?._id) {
             fetchSummary(token, user._id)
                 .then(data => {
                     // console.log("jobs", data)

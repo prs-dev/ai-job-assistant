@@ -5,9 +5,9 @@ import {useUserContext} from './UserContext'
 const ProtectedRoute = () => {
     const {token} = useUserContext()
     // console.log("tokne", token)
-  return token ? <div>
+  return token ? <div className='flex gap-[20px]'>
     <Sidebar />
-    <Outlet />
+     <Outlet />
   </div> : <Navigate to='/login' replace/>
 }
 
