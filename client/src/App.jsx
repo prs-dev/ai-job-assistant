@@ -8,6 +8,7 @@ import Sidebar from "./Sidebar"
 import EntryForm from "./EntryForm"
 import DetailsPage from "./DetailsPage"
 import PublicRoute from "./PublicRoute"
+import Analysis from "./components/Analysis"
 
 const App = () => {
   return (
@@ -26,6 +27,8 @@ const App = () => {
               <EntryForm />} />
             <Route path="/status" element={
               <DetailsPage />} />
+            <Route path="/analyse" element={
+              <Analysis />} />
           </Route>
         </Route>
       </Routes>
