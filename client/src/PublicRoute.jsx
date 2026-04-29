@@ -5,7 +5,7 @@ const PublicRoute = () => {
     const {token} = useUserContext()
   return token ? <Navigate to='/' replace /> : <div className='flex flex-col items-center justify-center h-full'>
   <div className='text-center text-3xl mb-[50px]'>
-    Your Personal AI Job Management Assistant 🎉
+    Your Personal AI Job Management Assistant ✨
   </div>
   <Outlet />
   </div>
