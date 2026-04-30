@@ -13,7 +13,8 @@ const Analysis = () => {
   const [input, setInput] = useState('')
   const [res, setRes] = useState(null)
   const [loader, setLoader] = useState(false)
-  const {aiAnalyse} = useApi()
+  const [cover, setCover] = useState('')
+  const {aiAnalyse, aiCover} = useApi()
 
   return (
     <div className='w-full p-2 flex flex-col gap-[10px]'>
@@ -29,9 +30,18 @@ const Analysis = () => {
               .then(data => {
                 setRes(data)
                 setLoader(false)
-                setInput(null)
+                setInput('')
               })
             }}>Analyse</Button>
+            <Button onClick={() => {
+              setLoader(true)
+              aiCover(token, input)
+              .then(data => {
+                setCover(data)
+                setLoader(false)
+                setInput('')
+              })
+            }}>Generate Cover Letter</Button>
         </div>
         {loader && <div className='flex items-center gap-2'>
           <Spinner /><span>Processing response...</span>
@@ -60,6 +70,10 @@ const Analysis = () => {
               <FieldContent>{res.additional_info}</FieldContent>
             </Field>
           </>}
+        </div>
+        <div>
+          {/* cover letter */}
+          {cover && <p>{cover}</p>}
         </div>
     </div>
   )

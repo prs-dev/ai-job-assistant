@@ -37,6 +37,18 @@ const aiResponse = async(input) => {
     }
 }
 
-module.exports = aiResponse
+const aiCover = async(input) => {
+    const messages = [
+        new SystemMessage(`
+                You are a helpful job assistant
+                You generate a short cover letter based on provided job description
+            `),
+            new HumanMessage(input)
+    ]
+    const res = await model.invoke(messages)
+    return res.content
+}
+
+module.exports = {aiResponse, aiCover}
 
 
