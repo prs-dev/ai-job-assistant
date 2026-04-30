@@ -113,6 +113,21 @@ const useApi = () => {
         }
     }
 
+    const aiAnalyse = async(token, input) => {
+        const res = await fetch('/api/ai/analyse', {
+            method: "post",
+            headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${token}`
+            },
+             body: JSON.stringify({input})
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     return {
         registerUser,
         loginUser,
@@ -121,7 +136,8 @@ const useApi = () => {
         allJobs,
         updateJobStatus, 
         deleteJob,
-        fetchSummary
+        fetchSummary, 
+        aiAnalyse
     }
 }
 
