@@ -1,7 +1,10 @@
-const hello = (req, res) => {
-    res.send(":hello")
+const aiResponse = require('../config/ai')
+const analyseDescription = async(req, res) => {
+    const {input} = req.body
+    const data = await aiResponse(input)
+    return res.status(200).json(data)
 }
 
 module.exports = {
-    hello
+    analyseDescription
 }

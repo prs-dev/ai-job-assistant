@@ -1,6 +1,7 @@
 const router = require('express').Router()
-const {hello} = require('../controllers/ai.controller')
+const {analyseDescription} = require('../controllers/ai.controller')
+const { validToken } = require('../middlewares/auth')
 
-router.get('/', hello)
+router.post('/analyse', validToken, analyseDescription)
 
 module.exports = router
