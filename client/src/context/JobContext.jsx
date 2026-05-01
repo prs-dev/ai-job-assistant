@@ -16,6 +16,7 @@ export const JobContextProvider = ({ children }) => {
     // console.log("user I am here", user._id)
 
     useEffect(() => {
+        // console.log("i have been called")
         if (user?._id) {
             allJobs(user?._id, token)
                 .then(data => {
@@ -23,7 +24,7 @@ export const JobContextProvider = ({ children }) => {
                     setJobs(data.jobs)
                 })
         }
-    }, [token, loading])
+    }, [token, user, loading])
 
     useEffect(() => {
         if (user?._id) {
@@ -33,7 +34,7 @@ export const JobContextProvider = ({ children }) => {
                     setSummary(data?.summary[0])
                 })
         }
-    }, [token, loading])
+    }, [token, user, loading])
 
     return (
         <JobContext.Provider value={{jobs, setJobs, summary, loading, setLoading}}>

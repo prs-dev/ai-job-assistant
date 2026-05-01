@@ -143,6 +143,20 @@ const useApi = () => {
         }
     }
 
+    const uploadResume = async(token, body) => {
+        const res = await fetch('/api/upload', {
+            method: "post",
+            headers: {
+                authorization: `Bearer ${token}`
+            },
+            body
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     return {
         registerUser,
         loginUser,
@@ -153,7 +167,8 @@ const useApi = () => {
         deleteJob,
         fetchSummary, 
         aiAnalyse, 
-        aiCover
+        aiCover,
+        uploadResume
     }
 }
 
