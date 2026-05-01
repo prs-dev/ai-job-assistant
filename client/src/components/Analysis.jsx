@@ -17,9 +17,10 @@ const Analysis = () => {
   const [resume, setResume] = useState(null)
   const [filename, setFilename] = useState('')
   const [cover, setCover] = useState('')
-  const { aiAnalyse, aiCover, uploadResume } = useApi()
+  const [result, setResult] = useState(null) //comparision results
+  const { aiAnalyse, aiCover, uploadResume, aiCompare } = useApi()
 
-  console.log("resume", resume)
+  // console.log("resume", resume)
 
   const handleFileUpload = async () => {
     if (resume) {
@@ -29,11 +30,11 @@ const Analysis = () => {
       if(data) {
         setFilename(data.filename)
       }
-      console.log(data)
+      // console.log(data)
     }
   }
 
-console.log(filename, resume)
+console.log(filename, resume, result)
 
   return (
     <div className='w-full p-2 flex flex-col gap-[10px]'>
@@ -47,16 +48,31 @@ console.log(filename, resume)
         <Button onClick={handleFileUpload}>Upload</Button>
       </div>
       <div>
+        {filename ? <Button onClick={() => {
+          setLoader(true)
+          setResult(null)
+          if(res) setRes(null)
+          aiCompare(token, input, filename)
+            .then(data => {
+              // console.log("test", data)
+              setResult(data.data)
+              setLoader(false)
+              setInput('')
+              setFilename('')
+              setResume(null)
+            })
+        }}>Analyse And Compare</Button> :
         <Button onClick={() => {
           setLoader(true)
           setRes(null)
+          if(result) setResult(null)
           aiAnalyse(token, input)
             .then(data => {
               setRes(data)
               setLoader(false)
               setInput('')
             })
-        }}>Analyse</Button>
+        }}>Analyse</Button>}
         <Button onClick={() => {
           setLoader(true)
           aiCover(token, input)
@@ -98,6 +114,19 @@ console.log(filename, resume)
       <div>
         {/* cover letter */}
         {cover && <p>{cover}</p>}
+      </div>
+      <div>
+        {/* score and comparision results */}
+        {result && <>
+          <Field>
+          <FieldLabel>Score</FieldLabel>
+          <FieldContent>{result?.score}/10</FieldContent>
+        </Field>
+        <Field>
+          <FieldLabel>Improvements Suggested</FieldLabel>
+          <FieldContent>{result?.improvements?.map(item => <p>{item}</p>)}</FieldContent>
+        </Field>
+        </>}
       </div>
     </div>
   )

@@ -49,6 +49,28 @@ const aiCover = async(input) => {
     return res.content
 }
 
-module.exports = {aiResponse, aiCover}
+const aiCompare = async(input, resumeData) => {
+    const messages = [
+        new SystemMessage(`
+                You are a helpful AI job assistant
+                You compare and give scores and improvements in JSON format by comparing and
+                analysing both provided JOB DESCRIPTION and RESUME DETAILS
+                You will provide the output in following format:
+                {
+                    score: out of 10, scored on how resume fares against the job requirements,
+                    improvements: suggested improvements based on what should be improved in resume to increase chances of getting hired, in ARRAY
+                }
+                YOU WILL ONLY ANSWER IN JSON FORMAT
+            `),
+            new HumanMessage(`
+                job description: ${input},
+                resume details: ${resumeData}
+                `)
+    ]
+    const res = await model.invoke(messages)
+    return res.content
+}
+
+module.exports = {aiResponse, aiCover, aiCompare}
 
 

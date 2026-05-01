@@ -143,6 +143,21 @@ const useApi = () => {
         }
     }
 
+    const aiCompare = async(token, input, filename) => {
+        const res = await fetch('/api/ai/compare', {
+            method: "post",
+            headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${token}`
+            },
+             body: JSON.stringify({input, filename})
+        })
+        if(res.ok) {
+            const data = await res.json()
+            return data
+        }
+    }
+
     const uploadResume = async(token, body) => {
         const res = await fetch('/api/upload', {
             method: "post",
@@ -168,7 +183,8 @@ const useApi = () => {
         fetchSummary, 
         aiAnalyse, 
         aiCover,
-        uploadResume
+        uploadResume, 
+        aiCompare
     }
 }
 

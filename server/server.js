@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     res.send('hello from server')
 })
 
-parse().then(data => console.log(data)).catch(err => console.log(err))
+// parse().then(data => console.log(data)).catch(err => console.log(err))
 
 dbConnect()
 
