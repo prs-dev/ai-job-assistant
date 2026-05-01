@@ -3,9 +3,10 @@ import { useJobContext } from './context/JobContext'
 
 //shadcn
 import {Card, CardTitle, CardHeader, CardDescription, CardContent} from './components/ui/card'
+import { Spinner } from './components/ui/spinner'
 
 const Dashboard = () => {
-  const {summary} = useJobContext()
+  const {summary, loading} = useJobContext()
   // console.log("summary", summary)
   return (
     <div className='w-full flex gap-[10px]'>
