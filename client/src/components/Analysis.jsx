@@ -15,6 +15,7 @@ const Analysis = () => {
   const [res, setRes] = useState(null)
   const [loader, setLoader] = useState(false)
   const [resume, setResume] = useState(null)
+  const [filename, setFilename] = useState('')
   const [cover, setCover] = useState('')
   const { aiAnalyse, aiCover, uploadResume } = useApi()
 
@@ -25,9 +26,14 @@ const Analysis = () => {
       const formData = new FormData()
       formData.append("resume", resume)
       const data = await uploadResume(token, formData)
+      if(data) {
+        setFilename(data.filename)
+      }
       console.log(data)
     }
   }
+
+console.log(filename, resume)
 
   return (
     <div className='w-full p-2 flex flex-col gap-[10px]'>
